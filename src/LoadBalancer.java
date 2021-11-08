@@ -12,6 +12,7 @@ import java.util.*;
 
 
 import RoundRobin.RoundRobinDatacenterBroker;
+import ShortestJobFirst.ShortestJobFirstDatacenterBroker;
 import org.cloudbus.cloudsim.*;
 
 import org.cloudbus.cloudsim.core.CloudSim;
@@ -113,9 +114,8 @@ public class LoadBalancer {
                             gotBroker = true;
                             break;
                         case 2 :
-                            //broker = new ShortestJobFirstDatacenterBroker("Broker");
-                            Log.printLine("SJF not implemented yet");
-                            gotBroker = false;
+                            broker = new ShortestJobFirstDatacenterBroker("Broker");
+                            gotBroker = true;
                             break;
                         case 3 :
                             //broker = new FCFSDatacenterBroker("Broker");
@@ -305,7 +305,7 @@ public class LoadBalancer {
         Log.printLine();
         Log.printLine("========================================== OUTPUT ==========================================");
         Log.printLine("Cloudlet ID" + indent + "STATUS" + indent +
-                "Datacenter ID" + indent + indent + "VM ID" + indent + indent + "Time" + indent + "Start Time" + indent + "Finish Time");
+                "Datacenter ID" + indent + "VM ID" + indent + " " + "Time" + indent + "Start Time" + indent + "Finish Time");
 
         for (Cloudlet value : list) {
             Log.print(indent + String.format("%02d", value.getCloudletId()) + indent + indent);
@@ -313,8 +313,8 @@ public class LoadBalancer {
             if (value.getCloudletStatus() == Cloudlet.SUCCESS) {
                 Log.print("SUCCESS");
 
-                Log.printLine(indent + indent + indent + value.getResourceId() +
-                        indent + indent + indent + indent + value.getVmId() +
+                Log.printLine(indent + indent + String.format("%02d", value.getResourceId()) +
+                        indent + indent + indent + String.format("%02d", value.getVmId()) +
                         indent + indent + String.format("%.2f", value.getActualCPUTime()) +
                         indent + indent + String.format("%.2f", value.getExecStartTime()) +
                         indent + indent + indent + String.format("%.2f", value.getFinishTime()));
