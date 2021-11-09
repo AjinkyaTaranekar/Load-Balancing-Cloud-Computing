@@ -11,6 +11,7 @@
 import java.util.*;
 
 
+import FirstComeFirstServe.FCFSDatacenterBroker;
 import Priority.PriorityDatacenterBroker;
 import RoundRobin.RoundRobinDatacenterBroker;
 import ShortestJobFirst.ShortestJobFirstDatacenterBroker;
@@ -120,8 +121,7 @@ public class LoadBalancer {
                             gotBroker = true;
                             break;
                         case 3 :
-                            //broker = new FCFSDatacenterBroker("Broker");
-                            Log.printLine("FCFS not implemented yet");
+                            broker = new FCFSDatacenterBroker("Broker");
                             gotBroker = false;
                             break;
                         case 4 :
