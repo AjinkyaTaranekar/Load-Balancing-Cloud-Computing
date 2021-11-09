@@ -11,12 +11,14 @@
 import java.util.*;
 
 
+//import RoundRobin.RoundRobinDatacenterBroker;
+import GeneticAlgorithm.GeneticAlgorithmDatacenterBroker;
 import FirstComeFirstServe.FCFSDatacenterBroker;
 import Priority.PriorityDatacenterBroker;
 import RoundRobin.RoundRobinDatacenterBroker;
 import ShortestJobFirst.ShortestJobFirstDatacenterBroker;
 import org.cloudbus.cloudsim.*;
-
+import RoundRobin.*;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.provisioners.BwProvisionerSimple;
 import org.cloudbus.cloudsim.provisioners.PeProvisionerSimple;
@@ -125,9 +127,9 @@ public class LoadBalancer {
                             gotBroker = false;
                             break;
                         case 4 :
-                            //broker = new GeneticAlgorithmDatacenterBroker("Broker");
-                            Log.printLine("GA not implemented yet");
-                            gotBroker = false;
+                            broker = new GeneticAlgorithmDatacenterBroker("Broker");
+                            //Log.printLine("GA not implemented yet");
+                            gotBroker = true;
                             break;
                         case 5 :
                             broker = new PriorityDatacenterBroker("Broker");
