@@ -152,7 +152,9 @@ public class GeneticAlgorithmDatacenterBroker extends DatacenterBroker {
             finalvmlist.add(gene.getVmFromGene());
         }
 
-        System.out.println(finalvmlist);
+        getVmList().clear();
+        getCloudletList().clear();
+
         getVmList().addAll(finalvmlist);
         getCloudletList().addAll(finalcloudletList);
     }

@@ -25,25 +25,24 @@ public class ShortestJobFirstDatacenterBroker extends DatacenterBroker {
             System.out.println("Task" + cloudletList.get(i).getCloudletId() + " is bound with VM" + vmList.get(i % reqVms).getId());
         }
 
-        ArrayList<Cloudlet> list = new ArrayList<>(getCloudletReceivedList());
+        Cloudlet[] list = new ArrayList<Cloudlet>(getCloudletReceivedList()).toArray(new Cloudlet[0]);
 
-        Cloudlet[] list2 = list.toArray(new Cloudlet[0]);
 
-        Cloudlet temp = null;
-
-        int n = list.size();
+        int n = list.length;
 
         for (int i = 0; i < n; i++) {
+            Cloudlet temp = null;
             for (int j = 1; j < (n - i); j++) {
-                if (list2[j - 1].getCloudletLength() / (vm.getMips() * vm.getNumberOfPes()) > list2[j].getCloudletLength() / (vm.getMips() * vm.getNumberOfPes())) {
-                    temp = list2[j - 1];
-                    list2[j - 1] = list2[j];
-                    list2[j] = temp;
+                if (list[j - 1].getCloudletLength() / (vm.getMips() * vm.getNumberOfPes())
+                        > list[j].getCloudletLength() / (vm.getMips() * vm.getNumberOfPes())) {
+                    temp = list[j - 1];
+                    list[j - 1] = list[j];
+                    list[j] = temp;
                 }
             }
         }
 
-        setCloudletReceivedList(list);
+        setCloudletReceivedList(List.of(list));
     }
 
     @Override

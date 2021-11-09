@@ -72,10 +72,10 @@ public class PriorityDatacenterBroker extends DatacenterBroker {
                 priorityList.get(i).refreshTask();
             }
 
-            Collections.sort(priorityList, (Task t1, Task t2) -> Float.compare(t2.priority, t1.priority));
+            priorityList.sort((Task t1, Task t2) -> Float.compare(t2.priority, t1.priority));
             priorityList.forEach((t) -> submissionList.add(cloudletList.get(t.cloudletIndex)));
 
-
+            getCloudletList().clear();
             getCloudletList().addAll(submissionList);
         }catch (Exception e) {
             e.printStackTrace();

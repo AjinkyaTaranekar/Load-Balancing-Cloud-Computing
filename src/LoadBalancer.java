@@ -124,11 +124,10 @@ public class LoadBalancer {
                             break;
                         case 3 :
                             broker = new FCFSDatacenterBroker("Broker");
-                            gotBroker = false;
+                            gotBroker = true;
                             break;
                         case 4 :
                             broker = new GeneticAlgorithmDatacenterBroker("Broker");
-                            //Log.printLine("GA not implemented yet");
                             gotBroker = true;
                             break;
                         case 5 :
@@ -146,19 +145,21 @@ public class LoadBalancer {
             int brokerId = broker.getId();
 
             Log.printLine();
-            Log.printLine("Fourth step: Create VMs and send them to broker");
+            Log.printLine("Fourth step: Create VMs");
             Log.printLine("Enter number of vms:");
             int numberOfVm = scanner.nextInt();
 
             List<Vm> vmList = createVM(brokerId, numberOfVm); 
-            broker.submitVmList(vmList);
 
             Log.printLine();
-            Log.printLine("Fifth step: Create Cloudlets and send them to broker");
+            Log.printLine("Fifth step: Create Cloudlets");
             Log.printLine("Enter number of cloudlet");
             int numberOfCloudlet = scanner.nextInt();
 
-            List<Cloudlet> cloudletList = createCloudlet(brokerId, numberOfCloudlet); 
+            List<Cloudlet> cloudletList = createCloudlet(brokerId, numberOfCloudlet);
+            Log.printLine("Sending them to broker...");
+
+            broker.submitVmList(vmList);
             broker.submitCloudletList(cloudletList);
 
             Log.printLine();
@@ -314,12 +315,14 @@ public class LoadBalancer {
         Log.printLine("========================================== OUTPUT ==========================================");
         Log.printLine("Cloudlet ID" + indent + "STATUS" + indent +
                 "Datacenter ID" + indent + "VM ID" + indent + " " + "Time" + indent + "Start Time" + indent + "Finish Time");
+        double time = 0;
 
         for (Cloudlet value : list) {
             Log.print(indent + String.format("%02d", value.getCloudletId()) + indent + indent);
 
             if (value.getCloudletStatus() == Cloudlet.SUCCESS) {
                 Log.print("SUCCESS");
+                time += (  value.getFinishTime() - value.getExecStartTime());
 
                 Log.printLine(indent + indent + String.format("%02d", value.getResourceId()) +
                         indent + indent + indent + String.format("%02d", value.getVmId()) +
@@ -328,6 +331,10 @@ public class LoadBalancer {
                         indent + indent + indent + String.format("%.2f", value.getFinishTime()));
             }
         }
+
+        double avgTime = time/list.toArray().length;
+        Log.printLine("Total CPU Time: " + time);
+        Log.printLine("Average CPU Time: " + avgTime);
 
     }
 

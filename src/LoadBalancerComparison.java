@@ -159,11 +159,16 @@ public class LoadBalancerComparison {
                 Log.printLine();
                 Log.printLine("Simulation Complete");
             }
-            String indent = "    ";
-            Log.printLine("Broker" + indent + indent + indent + indent +  "Total CPU Time" + indent + "Average Time");
-            for (Map<String, String> result: results){
-                Log.printLine(result.get("broker") + indent + result.get("total_cpu_time") + indent + result.get("average_cpu_time"));
+
+            String leftAlignFormat = "| %-39s | %-15s | %-15s |%n";
+
+            System.out.format("+-----------------------------------------+-----------------+-----------------+%n");
+            System.out.format("| Broker                                  | Total CPU Time  | Average CPU Time|%n");
+            System.out.format("+-----------------------------------------+-----------------+-----------------+%n");
+            for (Map<String, String> result: results) {
+                System.out.format(leftAlignFormat, result.get("broker"), result.get("total_cpu_time"), result.get("average_cpu_time"));
             }
+            System.out.format("+-----------------------------------------+-----------------+-----------------+%n");
         }
         catch (Exception e)
         {
@@ -298,7 +303,9 @@ public class LoadBalancerComparison {
         double time = 0;
 
         for (Cloudlet value : list) {
-            time += value.getActualCPUTime();
+            if (value.getCloudletStatus() == Cloudlet.SUCCESS) {
+                time += value.getActualCPUTime();
+            }
         }
 
         double avgTime = time/list.toArray().length;
@@ -307,8 +314,8 @@ public class LoadBalancerComparison {
 
         Map<String, String> result = new HashMap<>();
         result.put("broker", broker);
-        result.put("total_cpu_time", String.format("%.2f", time));
-        result.put("average_cpu_time", String.format("%.2f", avgTime));
+        result.put("total_cpu_time", String.format("%.5f", time));
+        result.put("average_cpu_time", String.format("%.5f", avgTime));
 
         results.add(result);
     }

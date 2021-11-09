@@ -41,7 +41,8 @@ public class RoundRobinDatacenterBroker extends DatacenterBroker {
             String datacenterName = CloudSim.getEntityName(datacenterId);
 
             if (!getVmsToDatacentersMap().containsKey(vm.getId())) {
-                Log.printLine(CloudSim.clock() + ": " + getName() + ": Trying to Create VM #" + vm.getId() + " in " + datacenterName);
+                Log.printLine(CloudSim.clock() + ": " + getName() + ": " +
+                        "Trying to Create VM #" + vm.getId() + " in " + datacenterName);
                 sendNow(datacenterId, CloudSimTags.VM_CREATE_ACK, vm);
                 numberOfVmsAllocated++;
             }
