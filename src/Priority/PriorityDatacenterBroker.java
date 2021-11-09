@@ -56,11 +56,11 @@ public class PriorityDatacenterBroker extends DatacenterBroker {
             List<Task> priorityList = new ArrayList<Task>();
 
             int[] priorityTestVals = new int[getCloudletList().size()];
+            Log.printLine("Assigning random priorities (1-10) to tasks");
 
+            Random random = new Random();
             for (int i = 0; i < getCloudletList().size(); i++) {
-                Log.printLine();
-                Log.printLine("Give the priority for "+i+"th task (1-10)");
-                priorityTestVals[i] = scanner.nextInt();
+                priorityTestVals[i] = random.nextInt(10);
             }
 
             for (int id = 0; id < getCloudletList().size(); id++) {
