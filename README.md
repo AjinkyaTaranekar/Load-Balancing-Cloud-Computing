@@ -14,3 +14,7 @@ The processes with higher priority should be carried out first, whereas jobs wit
 
 * It is a evolutionary technique based on the concept of "survival of the fittest". It is divided into four main steps: population generation, chromosome evaluation, crossover and mutation, evaluation of modified chromosome. The above steps make one iteration of the algorithm and number of iterations are fixed according to the problem. These steps are iteratively performed until a stopping criteria is met.
 
+Depending upon the use case scenarios, different load balancing techniques can be adopted accordingly. However a detailed study on the above mentioned algorithm indicated that scheduling algorithms work well in most of the cases providing these benefits : maximizing resources utilization while minimizing the total task execution time, Achieving a high system throughput, Increasing the number of successfully completed tasks, Achieving a high system throughput makes it suitable to use over the complex Genetic Algorithm which works on proactive techniques.
+
+
+
