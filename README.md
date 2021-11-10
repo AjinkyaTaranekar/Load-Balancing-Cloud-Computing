@@ -17,4 +17,5 @@ The processes with higher priority should be carried out first, whereas jobs wit
 Depending upon the use case scenarios, different load balancing techniques can be adopted accordingly. However a detailed study on the above mentioned algorithm indicated that scheduling algorithms work well in most of the cases providing these benefits : maximizing resources utilization while minimizing the total task execution time, Achieving a high system throughput, Increasing the number of successfully completed tasks, Achieving a high system throughput makes it suitable to use over the complex Genetic Algorithm which works on proactive techniques.
 
 
+![image](https://user-images.githubusercontent.com/80829881/141050488-ee45ceb2-4240-4837-ba1a-d3c3492c79e9.png)
 
